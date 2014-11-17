@@ -57,11 +57,11 @@ angular.module("leaflet-directive").factory('leafletControlHelpers', function ($
 
             if (mustBeLoaded) {
                 _layersControl = _createLayersControl(mapId);
-                for (i in baselayers) {
-                    if (isDefined(leafletLayers.baselayers[i])) {
-                        _layersControl.addBaseLayer(leafletLayers.baselayers[i], baselayers[i].name);
-                    }
-                }
+//                 for (i in baselayers) {
+//                     if (isDefined(leafletLayers.baselayers[i])) {
+//                         _layersControl.addBaseLayer(leafletLayers.baselayers[i], baselayers[i].name);
+//                     }
+//                 }
                 for (i in overlays) {
                     if (isDefined(leafletLayers.overlays[i])) {
                         _layersControl.addOverlay(leafletLayers.overlays[i], overlays[i].name);

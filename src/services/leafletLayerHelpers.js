@@ -219,7 +219,15 @@ angular.module("leaflet-directive").factory('leafletLayerHelpers', function ($ro
                 return L.imageOverlay(params.url, params.bounds, params.options);
             }
         },
-
+        raphael: {
+            createLayer: function (params){
+                return new R.BezierAnim(params.options.markers, 
+                                        params.options.attribut,
+                                        params.options.callbacks,
+                                        params.options.objectOptions
+                );
+            }
+        },
         // This "custom" type is used to accept every layer that user want to define himself.
         // We can wrap these custom layers like heatmap or yandex, but it means a lot of work/code to wrap the world,
         // so we let user to define their own layer outside the directive,

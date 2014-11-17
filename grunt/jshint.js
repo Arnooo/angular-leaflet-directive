@@ -22,6 +22,7 @@ module.exports = function (grunt, options) {
             globals: {
                 angular: false,
                 L: false,
+                R: false,
                 lvector: false,
                 cartodb: false,
                 // Jasmine
