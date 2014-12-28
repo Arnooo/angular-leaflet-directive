@@ -221,11 +221,20 @@ angular.module("leaflet-directive").factory('leafletLayerHelpers', function ($ro
         },
         raphael: {
             createLayer: function (params){
-                return new R.BezierAnim(params.options.markers, 
+                if(params.options.type === "BezierAnim"){
+                    return new R.BezierAnim(params.options.markers, 
+                                            params.options.attribut,
+                                            params.options.callbacks,
+                                            params.options.objectOptions
+                    );
+                }
+                else{
+                    return new R.TrackAnim(params.options.markers, 
                                         params.options.attribut,
                                         params.options.callbacks,
                                         params.options.objectOptions
-                );
+                    );
+                }
             }
         },
         // This "custom" type is used to accept every layer that user want to define himself.

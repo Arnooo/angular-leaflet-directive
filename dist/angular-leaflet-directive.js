@@ -706,6 +706,12 @@ angular.module("leaflet-directive").directive('layers', ["$log", "$q", "leafletD
                     // Only add the layers switch selector control if we have more than one baselayer + overlay
                     isLayersControlVisible = updateLayersControl(map, mapId, isLayersControlVisible, layers.baselayers, newOverlayLayers, leafletLayers);
                 }, true);
+
+                scope.$on('updateLayerData', function(event, eventData){
+                    if(layers.overlays[eventData.layerName]){
+                        leafletLayers.overlays[eventData.layerName].update(eventData.layerData);
+                    }
+                });
             });
         }
     };
@@ -2457,11 +2463,20 @@ angular.module("leaflet-directive").factory('leafletLayerHelpers', ["$rootScope"
         },
         raphael: {
             createLayer: function (params){
-                return new R.BezierAnim(params.options.markers, 
+                if(params.options.type === "BezierAnim"){
+                    return new R.BezierAnim(params.options.markers, 
+                                            params.options.attribut,
+                                            params.options.callbacks,
+                                            params.options.objectOptions
+                    );
+                }
+                else{
+                    return new R.TrackAnim(params.options.markers, 
                                         params.options.attribut,
                                         params.options.callbacks,
                                         params.options.objectOptions
-                );
+                    );
+                }
             }
         },
         // This "custom" type is used to accept every layer that user want to define himself.

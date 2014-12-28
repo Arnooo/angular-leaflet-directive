@@ -162,6 +162,12 @@ angular.module("leaflet-directive").directive('layers', function ($log, $q, leaf
                     // Only add the layers switch selector control if we have more than one baselayer + overlay
                     isLayersControlVisible = updateLayersControl(map, mapId, isLayersControlVisible, layers.baselayers, newOverlayLayers, leafletLayers);
                 }, true);
+
+                scope.$on('updateLayerData', function(event, eventData){
+                    if(layers.overlays[eventData.layerName]){
+                        leafletLayers.overlays[eventData.layerName].update(eventData.layerData);
+                    }
+                });
             });
         }
     };
